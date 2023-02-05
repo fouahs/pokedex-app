@@ -1,8 +1,3 @@
-alert('Hello world');
-
-let favoriteFood = 'Couscous';
-document.write(favoriteFood);
-
 // Creating array to hold data on Pokémon
 let pokemonList = [];
 
