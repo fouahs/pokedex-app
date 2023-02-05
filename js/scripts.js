@@ -24,11 +24,9 @@ for (let i = 0; i < pokemonList.length; i++) {
 
   // Adding a conditional so that the biggest Pokémon gets highlighted
   if (pokemonList[i].height > 1.8) {
-    document.write(`${pokemonList[i].name} (height: ${pokemonList[i].height}) - Wow, that's big!`);
-    document.write('<br>');
+    document.write(`<p> ${pokemonList[i].name} (height: ${pokemonList[i].height}) - Wow, that's big! </p>`);
   } else {
-    document.write(`${pokemonList[i].name} (height: ${pokemonList[i].height})`);
-    document.write('<br>');
+    document.write(`<p> ${pokemonList[i].name} (height: ${pokemonList[i].height}) </p>`);
   }
 
 }
