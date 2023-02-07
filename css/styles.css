@@ -1,7 +1,37 @@
-.button {
-  background-color: lightgray;
+body {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
 }
+
+main {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+ul {
+  padding: 0;
+}
+
 
 li {
   list-style-type: none;
+  margin: 0;
+}
+
+.button {
+  font-family: inherit;
+  background-color: rgba(133, 92, 43, 0.97);
+  color: white;
+  width: 20%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.button:hover {
+  cursor: pointer;
 }
