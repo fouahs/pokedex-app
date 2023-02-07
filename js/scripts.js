@@ -27,29 +27,35 @@ let pokemonRepository = (function () {
 
   }
 
+  function addListItem(pokemon) {
+
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listItem = document.createElement('li');
+    let button = document.createElement('button');
+
+    button.innerHTML = pokemon.name;
+    button.classList.add('button');
+
+    listItem.appendChild(button);
+
+    pokemonList.appendChild(listItem);
+
+  }
+
   return {
     getAll: getAll,
-    add: add
+    add: add,
+    addListItem: addListItem
   }
 
 })();
 
-// Creating function writing data of individual Pokémon on the webpage
-function writePokemon(pokemon) {
-
-  // Adding a conditional so that the biggest Pokémon gets highlighted
-  if (pokemon.height > 1.8) {
-    document.write(`<p> ${pokemon.name} (height: ${pokemon.height}) - Wow, that's big! </p>`);
-  } else {
-    document.write(`<p> ${pokemon.name} (height: ${pokemon.height}) </p>`);
-  }
-
-}
-
 // Adding Pikachu to the list of Pokémon
 pokemonRepository.add({ name: 'Pikachu', height: 0.4, weight: 6, type: ['electric'] });
 
-// Using function writePokemon on all Pokémon in the list
-pokemonRepository.getAll().forEach(writePokemon);
+// Using function pokemonRepository.addListItem on all Pokémon in the list
+pokemonRepository.getAll().forEach(function (pokemon){
+  pokemonRepository.addListItem(pokemon);
+});
 
 
