@@ -1,6 +1,7 @@
 // Creating pokemonRepository in IIFE form
 let pokemonRepository = (function () {
 
+  // Creating a list of Pokémon objects
   let pokemonList = [
     { name: "Bulbasaur", height: 0.7, weight: 6.9, type: ["grass", "poison"] },
     { name: "Ivysaur", height: 1, weight: 13, type: ["grass", "poison"] },
@@ -13,10 +14,12 @@ let pokemonRepository = (function () {
     { name: "Blastoise", height: 1.6, weight: 85.5, type: ["water"] },
   ]
 
+  // Function returning the whole list of Pokémon
   function getAll() {
     return pokemonList
   }
 
+  // Function to add a new Pokémon object to the list of Pokémon
   function add(item) {
 
     if (typeof item === "object" && item !== null) {
@@ -27,6 +30,7 @@ let pokemonRepository = (function () {
 
   }
 
+  // Function to list Pokémon on the page
   function addListItem(pokemon) {
 
     let pokemonList = document.querySelector('.pokemon-list');
@@ -47,10 +51,12 @@ let pokemonRepository = (function () {
 
   }
 
+  // Displaying the details of a Pokémon object
   function showDetails(pokemon) {
     console.log(pokemon);
   }
 
+  // Returning functions for use outside of pokemonRepository
   return {
     getAll: getAll,
     add: add,
