@@ -69,12 +69,64 @@ let pokemonRepository = (function () {
     });
   }
 
+  function showModal(name, height, url) {
+    let modalContainer = document.querySelector('#modal-container');
+
+    // Clear all existing modal content
+    modalContainer.innerHTML = '';
+
+    let modal = document.createElement("div");
+    modal.classList.add("modal");
+
+    // Add the new modal content
+    let closeButtonElement = document.createElement("button");
+    closeButtonElement.classList.add("modal-close");
+    closeButtonElement.innerText = "Close";
+    closeButtonElement.addEventListener('click', hideModal);
+
+    let imageElement = document.createElement("img");
+    imageElement.src = url;
+
+    let titleElement = document.createElement("h1");
+    titleElement.innerText = name;
+
+    let heightElement = document.createElement("p");
+    heightElement.innerText = "Height: " + height;
+
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(imageElement);
+    modal.appendChild(titleElement);
+    modal.appendChild(heightElement);
+    modalContainer.appendChild(modal);
+
+    modalContainer.addEventListener("click", (e) => {
+      let target = e.target;
+      if (target === modalContainer) {
+       hideModal();
+      }
+    });
+
+    modalContainer.classList.add("is-visible");
+  }
+
   // Displaying the details of a Pokémon object
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-      console.log(pokemon);
+      showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
     });
   }
+
+  function hideModal() {
+    let modalContainer = document.querySelector('#modal-container');
+    modalContainer.classList.remove('is-visible');
+  }
+
+  window.addEventListener("keydown", (e) => {
+    let modalContainer = document.querySelector("#modal-container");
+    if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
+      hideModal();
+    }
+  });
 
   // Returning functions for use outside of pokemonRepository
   return {
@@ -83,7 +135,9 @@ let pokemonRepository = (function () {
     getAll: getAll,
     addListItem: addListItem,
     loadDetails: loadDetails,
-    showDetails: showDetails
+    showDetails: showDetails,
+    showModal: showModal,
+    hideModal: hideModal,
   }
 
 })();
