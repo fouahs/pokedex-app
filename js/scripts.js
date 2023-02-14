@@ -20,8 +20,9 @@ let pokemonRepository = (function () {
       return response.json();
     }).then(function (json) {
       json.results.forEach(function (item) {
+        let capitalizedName = item.name[0].toUpperCase() + item.name.slice(1);
         let pokemon = {
-          name: item.name,
+          name: capitalizedName,
           detailsUrl: item.url
         };
         add(pokemon);
