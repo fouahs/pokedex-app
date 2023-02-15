@@ -70,16 +70,15 @@ let pokemonRepository = (function () {
     });
   }
 
+  // THis function displays the modal with details on a specific Pokémon
   function showModal(name, height, url) {
     let modalContainer = document.querySelector('#modal-container');
 
-    // Clear all existing modal content
     modalContainer.innerHTML = '';
 
     let modal = document.createElement("div");
     modal.classList.add("modal");
 
-    // Add the new modal content
     let closeButtonElement = document.createElement("button");
     closeButtonElement.classList.add("modal-close");
     closeButtonElement.innerText = "Close";
@@ -117,11 +116,13 @@ let pokemonRepository = (function () {
     });
   }
 
+  // Hiding the modal with details on a specific Pokémon
   function hideModal() {
     let modalContainer = document.querySelector('#modal-container');
     modalContainer.classList.remove('is-visible');
   }
 
+  // Ensuring that the modal is closed when pressing the Escape key
   window.addEventListener("keydown", (e) => {
     let modalContainer = document.querySelector("#modal-container");
     if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
