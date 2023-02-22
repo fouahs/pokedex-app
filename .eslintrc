@@ -6,7 +6,7 @@
   "extends": [
   "eslint:recommended"
 ],
-  "ignorePatterns": ["src/js/fetch-polyfill.js", "promise-polyfill.js"],
+  "ignorePatterns": ["fetch-polyfill.js", "promise-polyfill.js"],
   "rules": {
   "quotes": ["error", "double"]
 }
