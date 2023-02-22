@@ -1,4 +1,5 @@
 // Creating pokemonRepository in IIFE form
+
 let pokemonRepository = (function () {
 
   // Creating a list of Pokémon objects
