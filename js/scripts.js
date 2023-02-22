@@ -40,13 +40,17 @@
 
   // Function to list Pokémon on the page
   function addListItem(pokemon) {
-    let pokemonList = document.querySelector(".pokemon-list");
+
+    let pokemonList = document.querySelector("#pokemon-list");
     let listItem = document.createElement("li");
     let button = document.createElement("button");
 
     button.innerHTML = pokemon.name;
-    button.classList.add("button");
+    button.classList.add("btn-primary", "btn-block");
+    button.setAttribute("data-toggle", "modal");
+    button.setAttribute("data-target", "#pokemonModal");
 
+    listItem.classList.add("list-group-item", "col-sm-6", "col-md-4", "col-lg-3");
     listItem.appendChild(button);
 
     pokemonList.appendChild(listItem);
@@ -55,6 +59,7 @@
           showDetails(pokemon);
         }
     );
+
   }
 
   // This function fetches detailed information on a Pokémon (image, height and types) from the Pokémon API
@@ -73,41 +78,22 @@
 
   // THis function displays the modal with details on a specific Pokémon
   function showModal(name, height, url) {
-    let modalContainer = document.querySelector("#modal-container");
 
-    modalContainer.innerHTML = "";
+    let modalBody = document.querySelector(".modal-body");
+    modalBody.innerHTML = "";
 
-    let modal = document.createElement("div");
-    modal.classList.add("modal");
-
-    let closeButtonElement = document.createElement("button");
-    closeButtonElement.classList.add("modal-close");
-    closeButtonElement.innerText = "Close";
-    closeButtonElement.addEventListener("click", hideModal);
+    let modalTitle = document.querySelector(".modal-title");
+    modalTitle.innerHTML = name;
 
     let imageElement = document.createElement("img");
     imageElement.src = url;
 
-    let titleElement = document.createElement("h1");
-    titleElement.innerText = name;
-
     let heightElement = document.createElement("p");
     heightElement.innerText = "Height: " + height;
 
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(imageElement);
-    modal.appendChild(titleElement);
-    modal.appendChild(heightElement);
-    modalContainer.appendChild(modal);
+    modalBody.appendChild(imageElement);
+    modalBody.appendChild(heightElement);
 
-    modalContainer.addEventListener("click", (e) => {
-      let target = e.target;
-      if (target === modalContainer) {
-       hideModal();
-      }
-    });
-
-    modalContainer.classList.add("is-visible");
   }
 
   // Displaying the details of a Pokémon object
@@ -116,20 +102,6 @@
       showModal(pokemon.name, pokemon.height, pokemon.imageUrl);
     });
   }
-
-  // Hiding the modal with details on a specific Pokémon
-  function hideModal() {
-    let modalContainer = document.querySelector("#modal-container");
-    modalContainer.classList.remove("is-visible");
-  }
-
-  // Ensuring that the modal is closed when pressing the Escape key
-  window.addEventListener("keydown", (e) => {
-    let modalContainer = document.querySelector("#modal-container");
-    if (e.key === "Escape" && modalContainer.classList.contains("is-visible")) {
-      hideModal();
-    }
-  });
 
   // Returning functions for use outside of pokemonRepository
   return {
@@ -140,7 +112,6 @@
     loadDetails: loadDetails,
     showDetails: showDetails,
     showModal: showModal,
-    hideModal: hideModal,
   }
 
 })();
