@@ -48,7 +48,7 @@
     button.innerHTML = pokemon.name;
     button.classList.add("btn-primary", "btn-block");
     button.setAttribute("data-toggle", "modal");
-    button.setAttribute("data-target", "#pokemonModal");
+    button.setAttribute("data-target", "#pokemon-modal");
 
     listItem.classList.add("list-group-item", "col-sm-6", "col-md-4", "col-lg-3");
     listItem.appendChild(button);
