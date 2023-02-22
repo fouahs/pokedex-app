@@ -1,42 +1,40 @@
 // Creating pokemonRepository in IIFE form
 let pokemonRepository = (function () {
+
   // Creating a list of Pokémon objects
-  let pokemonList = [];
+  let pokemonList = []
 
   // Function to add a new Pokémon object to the list of Pokémon
   function add(pokemon) {
     if (typeof pokemon === "object" && pokemon !== null) {
       pokemonList.push(pokemon);
     } else {
-      console.log("False input");
+      console.log("False input")
     }
   }
 
   // This function fetches Pokémon data from the Pokémon API and adds it to the pokemonList array
   function loadList() {
     let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
-    return fetch(apiUrl)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (json) {
-        json.results.forEach(function (item) {
-          let capitalizedName = item.name[0].toUpperCase() + item.name.slice(1);
-          let pokemon = {
-            name: capitalizedName,
-            detailsUrl: item.url,
-          };
-          add(pokemon);
-        });
-      })
-      .catch(function (e) {
-        console.error(e);
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let capitalizedName = item.name[0].toUpperCase() + item.name.slice(1);
+        let pokemon = {
+          name: capitalizedName,
+          detailsUrl: item.url
+        };
+        add(pokemon);
       });
+    }).catch(function (e) {
+      console.error(e);
+    })
   }
 
   // Function returning the whole list of Pokémon
   function getAll() {
-    return pokemonList;
+    return pokemonList
   }
 
   // Function to list Pokémon on the page
@@ -53,25 +51,23 @@ let pokemonRepository = (function () {
     pokemonList.appendChild(listItem);
 
     button.addEventListener("click", function (event) {
-      showDetails(pokemon);
-    });
+          showDetails(pokemon);
+        }
+    );
   }
 
   // This function fetches detailed information on a Pokémon (image, height and types) from the Pokémon API
   function loadDetails(item) {
     let url = item.detailsUrl;
-    return fetch(url)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (details) {
-        item.imageUrl = details.sprites.front_default;
-        item.height = details.height;
-        item.types = details.types;
-      })
-      .catch(function (e) {
-        console.error(e);
-      });
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = details.types;
+    }).catch(function (e) {
+      console.error(e);
+    });
   }
 
   // THis function displays the modal with details on a specific Pokémon
@@ -106,7 +102,7 @@ let pokemonRepository = (function () {
     modalContainer.addEventListener("click", (e) => {
       let target = e.target;
       if (target === modalContainer) {
-        hideModal();
+       hideModal();
       }
     });
 
@@ -144,10 +140,14 @@ let pokemonRepository = (function () {
     showDetails: showDetails,
     showModal: showModal,
     hideModal: hideModal,
-  };
+  }
+
 })();
 
 // Using function pokemonRepository.loadList on all Pokémon in the list
 pokemonRepository.loadList().then(function () {
-  pokemonRepository.getAll().forEach(pokemonRepository.addListItem);
+  pokemonRepository.getAll().forEach(
+      pokemonRepository.addListItem
+  );
 });
+
