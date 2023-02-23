@@ -105,13 +105,9 @@
 
   // Returning functions for use outside of pokemonRepository
   return {
-    add: add,
     loadList: loadList,
     getAll: getAll,
     addListItem: addListItem,
-    loadDetails: loadDetails,
-    showDetails: showDetails,
-    showModal: showModal,
   }
 
 })();
